@@ -11,6 +11,7 @@
 import { Card } from '@/components';
 import Vue from 'vue';
 import VueKonva from 'vue-konva';
+import skyjson from '@/assets/sky.json'
 
 Vue.use(VueKonva);
 
@@ -22,19 +23,18 @@ let imgSize = {
   width: 1437,
   height: 1207
 }
-
 export default {
   components: {
     Card,
   },
   data() {
     return {
-      skyImg: new Image(imgSize.width, imgSize.height),
-      configStage: stageSize
+      configStage: stageSize,
+      stardata: skyjson,
+      configImg: {},
     };
   },
   mounted() {
-    this.skyImg.src = require("@/assets/images/sky.png");
     const container = document.querySelector(".skywrapper");
     const observer = new ResizeObserver(() => {
       stageSize.width = container.offsetWidth;
@@ -42,14 +42,17 @@ export default {
     });
     observer.observe(container);
   },
-  computed: {
-    configImg: function() {
-      return {
-        x: 0,
-        y: 0,
-        image: this.skyImg,
-        width: this.skyImg.width,
-        height: this.skyImg.height,
+  created() {
+    const image = new Image();
+    image.src = require("@/assets/images/sky.png");
+    image.onload = () => {
+      // set image only when it is loaded
+      this.configImg = {
+        x: -200,
+        y: -200,
+        image: image,
+        width: imgSize.width,
+        height: imgSize.height,
         draggable: true,
         dragBoundFunc: function(pos) {
           let newX = (pos.x <= 0 && pos.x+imgSize.width > stageSize.width) ? pos.x : pos.x > 0 ? 0 : stageSize.width-imgSize.width;
@@ -60,7 +63,7 @@ export default {
           };
         }
       }
-    },
+    };
   },
   methods: {
     imageClick(e) {
@@ -69,26 +72,10 @@ export default {
 
       console.log("y:",y);
       console.log("x:",x);
-      const stardata = [
-        {
-          name: "jupiter",
-          location:[228,635,294,702],
-          urls:[
-            "https://www.google.com/sky",
-            "https://snakeomatic.com",
-          ]
-        },
-        {
-          name: "jupiter",
-          location:[969,625,1066,714],
-          urls:[
-            "https://wedo.lu",
-            "https://www.google.com/sky",
-          ]
-        }
-      ];
+      
       let urls = [];
-      stardata.forEach(item => {
+      
+      this.stardata.forEach(item => {
         if(y>item.location[0] && y<item.location[2] && x>item.location[1] && x<item.location[3]){
           urls = item.urls;
         }
@@ -96,43 +83,13 @@ export default {
 
       console.log('urls', urls);
       this.$store.dispatch('saveUrls', urls);
-
-      // var parser = require('fast-xml-parser');
-      // var he = require('he');
-
-      // // var xmlData = require("@/assets/sky.xml");
-      // var options = {
-      //     attributeNamePrefix : "@_",
-      //     attrNodeName: "attr", //default is 'false'
-      //     textNodeName : "#text",
-      //     ignoreAttributes : true,
-      //     ignoreNameSpace : false,
-      //     allowBooleanAttributes : false,
-      //     parseNodeValue : true,
-      //     parseAttributeValue : false,
-      //     trimValues: true,
-      //     cdataTagName: "__cdata", //default is 'false'
-      //     cdataPositionChar: "\\c",
-      //     parseTrueNumberOnly: false,
-      //     arrayMode: false, //"strict"
-      //     attrValueProcessor: (val, attrName) => he.decode(val, {isAttributeValue: true}),//default is a=>a
-      //     tagValueProcessor : (val, tagName) => he.decode(val), //default is a=>a
-      //     stopNodes: ["parse-me-as-string"]
-      // };
-
-      // if( parser.validate(xmlData) === true) { //optional (it'll return an object in case it's not valid)
-      //     var jsonObj = parser.parse(xmlData,options);
-      // }
-
-      // // Intermediate obj
-      // var tObj = parser.getTraversalObj(xmlData,options);
     }
   }  
 };
 </script>
 <style lang="scss">
 .skywrapper{
-  height:50vh;
+  min-height:50vh;
 }
 .card{
   margin-bottom: 10px !important;

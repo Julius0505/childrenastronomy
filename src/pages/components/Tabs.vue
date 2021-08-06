@@ -216,6 +216,6 @@ export default {
   text-align: left !important;
 }
 .tabwrapper{
-  height: 35vh;
+  min-height: 35vh;
 }
 </style>

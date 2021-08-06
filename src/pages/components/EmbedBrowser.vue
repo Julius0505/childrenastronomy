@@ -4,8 +4,8 @@
       slot="raw-content"
       tab-content-classes="tab-content-padding text-center"
     >
-      <tab-pane v-for="(url, index) in getUrls" :key="index">
-        <template slot="label">
+      <tab-pane v-for="(url, index) in getUrls" :key="index" :id="url">
+        <template slot="label" :class="`label_${index}`">
           <i class="now-ui-icons objects_umbrella-13"></i> {{ url }}
         </template>
         <iframe :src="url" class="webframe"></iframe>
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     getUrls() {
-      console.log(this.$store.state.urls);
+      this.$forceUpdate();
       return this.$store.state.urls;
     }
   }
