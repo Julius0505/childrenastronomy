@@ -208,7 +208,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
 .tab-content.tab-content-padding {
   padding: 12px;
 }

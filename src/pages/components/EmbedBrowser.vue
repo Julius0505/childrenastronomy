@@ -14,11 +14,10 @@
   </div>
 </template>
 <script>
-import {  Tabs, TabPane } from '@/components';
+import { Tabs, TabPane } from '@/components';
 
 export default {
   components: {
-  
     Tabs,
     TabPane
   },
@@ -30,11 +29,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope>
-.tab-content.tab-content-padding {
-  padding: 10px;
-}
-
+<style lang="scss">
 .webframe{
   width: 100%;
   height: 75vh;

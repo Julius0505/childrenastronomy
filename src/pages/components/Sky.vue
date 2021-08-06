@@ -130,21 +130,14 @@ export default {
   }  
 };
 </script>
-<style lang="scss" scope>
-.tab-content.tab-content-padding {
-  padding: 20px;
-}
+<style lang="scss">
 .skywrapper{
   height:50vh;
-}
-.section-tabs{
-  background-color: transparent !important;
-  padding: 0 !important
 }
 .card{
   margin-bottom: 10px !important;
 }
 .card-body{
-  padding: 1px !important;
+  padding: 0 !important;
 } 
 </style>
