@@ -1,0 +1,23 @@
+
+<hotspot>
+	<hotspotname> Moon
+
+		<pixlelocation> 
+		0,0,10,10 
+		</pixlelocation>
+			
+
+		<BrowserTabs>
+			URL1
+			URL2
+			URL3
+			URL4
+		</BrowserTabs>
+
+	</hotspotname>
+
+</hotspot>
+
+
+
+
