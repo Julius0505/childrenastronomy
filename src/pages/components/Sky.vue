@@ -72,7 +72,7 @@ export default {
       const stardata = [
         {
           name: "jupiter",
-          location:[0,0,100,100],
+          location:[228,635,294,702],
           urls:[
             "https://www.google.com/sky",
             "https://snakeomatic.com",
@@ -80,7 +80,7 @@ export default {
         },
         {
           name: "jupiter",
-          location:[0,100,100,200],
+          location:[969,625,1066,714],
           urls:[
             "https://wedo.lu",
             "https://www.google.com/sky",
@@ -89,7 +89,7 @@ export default {
       ];
       let urls = [];
       stardata.forEach(item => {
-        if(x>item.location[0] && x<item.location[2] && y>item.location[1] && y<item.location[3]){
+        if(y>item.location[0] && y<item.location[2] && x>item.location[1] && x<item.location[3]){
           urls = item.urls;
         }
       });
